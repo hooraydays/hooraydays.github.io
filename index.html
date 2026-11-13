@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Hooray Days — Phones down. Play together.</title>
   <meta name="description" content="269 real-life family games and activities for ages 2–17. Free to download with 35 ideas. A one-off A$14.99 unlocks everything. No subscription, no ads, no account.">
   <meta name="theme-color" content="#6C5CE7">
@@ -10,6 +10,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="canonical" href="https://hooraydays.github.io/">
+  <link rel="preload" as="image" href="assets/logo-lockup.webp" type="image/webp">
+  <link rel="preload" as="font" href="assets/fonts/fredoka.woff2" type="font/woff2" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Hooray Days">
   <meta property="og:title" content="Hooray Days — Phones down. Play together.">
@@ -41,6 +43,7 @@
       --cream: #FFF8EC;
       --ink: #2A2350;
       --muted: #5A5278;
+      --sticky-h: 76px;
     }
 
     * { box-sizing: border-box; }
@@ -56,64 +59,97 @@
 
     header {
       background: var(--purple);
-      padding: 28px 24px 36px;
+      padding: 16px 20px 28px;
       text-align: center;
+    }
+    .logo-link {
+      display: block;
+      line-height: 0;
     }
     .logo {
       display: block;
-      width: min(560px, 92%);
+      width: min(280px, 78%);
       height: auto;
       margin: 0 auto;
+    }
+    .logo-link:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 4px;
+      border-radius: 12px;
+    }
+
+    header h1 {
+      font-family: Fredoka, "Trebuchet MS", "Segoe UI", sans-serif;
+      font-weight: 650;
+      font-size: clamp(1.95rem, 8vw, 3.1rem);
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      margin: 10px 0 8px;
+      color: var(--cream);
+    }
+
+    header .tagline {
+      font-family: Fredoka, "Trebuchet MS", "Segoe UI", sans-serif;
+      font-weight: 550;
+      font-size: clamp(1.05rem, 3.4vw, 1.4rem);
+      color: var(--cream);
+      margin: 0 0 22px;
+    }
+
+    .cta { margin: 0; }
+    .store-btn {
+      display: inline-block;
+      line-height: 0;
+      padding: 4px;
+    }
+    .store-btn img {
+      width: min(260px, 72vw);
+      height: auto;
+      display: block;
+    }
+    .store-btn:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+      border-radius: 12px;
     }
 
     main {
       width: min(720px, 100%);
       margin: 0 auto;
-      padding: 40px 24px 64px;
+      padding: 28px 24px 40px;
       text-align: center;
     }
 
-    h1 {
-      font-family: Fredoka, "Trebuchet MS", "Segoe UI", sans-serif;
-      font-weight: 650;
-      font-size: clamp(2rem, 7.2vw, 3.25rem);
-      letter-spacing: -0.03em;
-      line-height: 1.12;
-      margin: 0 0 12px;
+    .benefits {
+      list-style: none;
+      margin: 0 auto 20px;
+      padding: 0;
+      max-width: 28em;
+      text-align: left;
+      font-size: 1.08rem;
+      line-height: 1.45;
       color: var(--ink);
     }
-
-    .tagline {
-      font-family: Fredoka, "Trebuchet MS", "Segoe UI", sans-serif;
-      font-weight: 550;
-      font-size: clamp(1.15rem, 3.6vw, 1.45rem);
-      color: var(--purple);
-      margin: 0 0 28px;
+    .benefits li {
+      position: relative;
+      padding: 0.45em 0 0.45em 1.7em;
     }
-
-    .copy {
-      margin: 0 auto 32px;
-      max-width: 38em;
-      font-size: 1.125rem;
-      line-height: 1.65;
-      color: var(--muted);
+    .benefits li + li {
+      border-top: 1px solid rgba(42, 35, 80, 0.08);
     }
-
-    .cta {
-      margin: 0 0 12px;
-    }
-    .store-btn {
-      display: inline-block;
-      line-height: 0;
-    }
-    .store-btn img {
-      width: 200px;
-      height: auto;
-      display: block;
+    .benefits li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.85em;
+      width: 0.65em;
+      height: 0.65em;
+      border-radius: 50%;
+      background: var(--mint);
     }
 
     .android {
-      margin: 14px 0 40px;
+      margin: 0 0 32px;
       font-family: Fredoka, "Trebuchet MS", "Segoe UI", sans-serif;
       font-weight: 550;
       font-size: 1.05rem;
@@ -124,6 +160,7 @@
       display: grid;
       gap: 24px;
       justify-items: center;
+      margin-bottom: 8px;
     }
     .phone {
       width: min(280px, 100%);
@@ -132,9 +169,14 @@
       padding: 10px;
       box-shadow: 0 18px 40px rgba(42, 35, 80, 0.18);
     }
-    .phone img,
-    .phone source {
-      /* source has no visual */
+    a.phone {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    a.phone:focus-visible {
+      outline: 3px solid var(--deep);
+      outline-offset: 4px;
     }
     .phone img {
       width: 100%;
@@ -142,6 +184,13 @@
       display: block;
       border-radius: 22px;
       background: #fff8ec;
+    }
+
+    .cta-again {
+      margin: 36px 0 0;
+    }
+    .cta-again .store-btn:focus-visible {
+      outline-color: var(--deep);
     }
 
     footer {
@@ -165,14 +214,71 @@
       color: var(--purple);
     }
 
+    .sticky-cta {
+      display: none;
+    }
+
+    @media (max-width: 699px) {
+      body {
+        padding-bottom: calc(var(--sticky-h) + env(safe-area-inset-bottom, 0px));
+      }
+      .sticky-cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+        background: #fff;
+        border-top: 1px solid rgba(42, 35, 80, 0.12);
+        box-shadow: 0 -8px 24px rgba(42, 35, 80, 0.12);
+        padding: 8px 16px calc(8px + env(safe-area-inset-bottom, 0px));
+        min-height: calc(var(--sticky-h) + env(safe-area-inset-bottom, 0px));
+      }
+      .sticky-copy {
+        margin: 0;
+        font-family: Fredoka, "Trebuchet MS", "Segoe UI", sans-serif;
+        font-weight: 550;
+        font-size: 0.95rem;
+        color: var(--ink);
+        line-height: 1.25;
+        text-align: left;
+        max-width: 8.5em;
+      }
+      .sticky-cta .store-btn img {
+        width: 168px;
+      }
+      .sticky-cta .store-btn:focus-visible {
+        outline-color: var(--deep);
+      }
+      /* The repeat badge under the screenshots is redundant next to the sticky bar. */
+      .cta-again { display: none; }
+    }
+
+    @media (max-width: 699px) and (max-height: 700px) {
+      .logo { width: min(240px, 72%); }
+      header { padding: 12px 16px 22px; }
+      header h1 { margin-top: 6px; }
+      header .tagline { margin-bottom: 16px; }
+    }
+
     @media (min-width: 700px) {
-      main { padding-top: 52px; }
+      header { padding: 28px 24px 40px; }
+      .logo {
+        width: min(500px, 70%);
+      }
+      header h1 { margin-top: 16px; }
+      main { padding-top: 40px; padding-bottom: 64px; }
       .shots {
         grid-template-columns: 1fr 1fr;
         gap: 32px;
         align-items: start;
       }
       .phone { width: 300px; }
+      .store-btn img { width: 240px; }
     }
 
     @media (prefers-reduced-motion: no-preference) {
@@ -183,37 +289,50 @@
 </head>
 <body>
   <header>
-    <picture>
-      <source type="image/webp" srcset="assets/logo-lockup.webp">
-      <img class="logo" src="assets/logo-lockup.png" width="1200" height="600" alt="Hooray Days, the family fun app">
-    </picture>
+    <a class="logo-link" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
+      <picture>
+        <source type="image/webp" srcset="assets/logo-lockup.webp">
+        <img class="logo" src="assets/logo-lockup.png" width="1200" height="600" alt="Hooray Days, the family fun app — download on the App Store" fetchpriority="high">
+      </picture>
+    </a>
+    <h1>Phones down. Play together.</h1>
+    <p class="tagline">Built by a dad, for every family.</p>
+    <div class="cta">
+      <a class="store-btn" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
+        <img src="assets/download-on-the-app-store.svg" width="260" height="87" alt="Download on the App Store">
+      </a>
+    </div>
   </header>
 
   <main>
-    <h1>Phones down. Play together.</h1>
-    <p class="tagline">Built by a dad, for every family.</p>
-    <p class="copy">269 real-life family games and activities for ages 2–17. Free to download with 35 ideas. A one-off A$14.99 unlocks everything. No subscription, no ads, no account. New content is added over time at no extra cost.</p>
-
-    <div class="cta">
-      <a class="store-btn" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
-        <img src="assets/download-on-the-app-store.svg" width="200" height="67" alt="Download on the App Store">
-      </a>
-    </div>
+    <ul class="benefits">
+      <li>Free to download, with 35 free ideas</li>
+      <li>A one-off A$14.99 unlocks all 269</li>
+      <li>No subscription, no account, no ads</li>
+      <li>269 real-life family games and activities for ages 2–17</li>
+      <li>New content added over time at no extra cost</li>
+    </ul>
     <p class="android">Android coming soon</p>
 
     <div class="shots">
-      <figure class="phone">
+      <a class="phone" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
         <picture>
           <source type="image/webp" srcset="assets/ideas.webp">
-          <img src="assets/ideas.png" width="780" height="1688" alt="The Ideas screen in Hooray Days, showing family activities filtered for Dora and Ronaldo, with 212 of 269 ideas unlocked.">
+          <img src="assets/ideas.png" width="780" height="1688" loading="lazy" decoding="async" alt="Download on the App Store — the Ideas screen in Hooray Days, showing family activities with 212 of 269 ideas unlocked.">
         </picture>
-      </figure>
-      <figure class="phone">
+      </a>
+      <a class="phone" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
         <picture>
           <source type="image/webp" srcset="assets/unlock.webp">
-          <img src="assets/unlock.png" width="780" height="1688" alt="The unlock screen: 35 starter ideas are free, and a one-off A$14.99 unlocks all 269, with no subscription, no account and no ads.">
+          <img src="assets/unlock.png" width="780" height="1688" loading="lazy" decoding="async" alt="Download on the App Store — 35 starter ideas are free, and a one-off A$14.99 unlocks all 269, with no subscription, no account and no ads.">
         </picture>
-      </figure>
+      </a>
+    </div>
+
+    <div class="cta cta-again">
+      <a class="store-btn" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
+        <img src="assets/download-on-the-app-store.svg" width="240" height="80" alt="Download on the App Store">
+      </a>
     </div>
   </main>
 
@@ -223,5 +342,12 @@
     Find us on Instagram
     <a href="https://www.instagram.com/hooraydaysapp/">@hooraydaysapp</a>.
   </footer>
+
+  <nav class="sticky-cta" aria-label="Download the app">
+    <p class="sticky-copy">Free to download</p>
+    <a class="store-btn" href="https://apps.apple.com/au/app/hooray-days-family-fun/id6825618584">
+      <img src="assets/download-on-the-app-store.svg" width="168" height="56" alt="Download on the App Store">
+    </a>
+  </nav>
 </body>
 </html>
